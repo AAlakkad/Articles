@@ -1,14 +1,16 @@
-Random titles
--------------
-
-- Gulp
-- Bootstrap
-- Foundation
-- Bower
-- WordPress with Composer
-- WordPress modern theme (bower, gulp, foundation)
+مقدمة إلى Bower
 
 
-Series
--------
-- WordPress modern application development using Composer, Gulp, and Bootstrap.
+[TOC]
+
+
+# ما هو Bower؟
+# لكن ما الفائدة منه؟ ألا يمكنني متابعة عملي كما اعتدت من دونه؟
+# من يقوم باستخدام Bower؟
+# حسناً، أي نوع من المشاريع يمكنني استخدام Bower معه؟
+# ممتاز! كيف أبدأ؟
+## 1. متطلبات الاستخدام
+## 2. التنصيب
+### أ. ويندوز
+### ب. لينكس
+### ت. ماك
