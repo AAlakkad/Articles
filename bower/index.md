@@ -26,8 +26,8 @@ bower install jquery bootstrap fontawesome
 
 سنأتي لطريقة الاستخدام بالتفصيل، الأمثلة السابقة فقط لتوضيح الفوائد والميزات التي يقدمها Bower.
 
-## من يقوم باستخدام Bower؟
-## حسناً، أي نوع من المشاريع يمكنني استخدام Bower معه؟
+## ** من يقوم باستخدام Bower؟
+## ** حسناً، أي نوع من المشاريع يمكنني استخدام Bower معه؟
 
 
 # كيف أبدأ؟
@@ -157,3 +157,12 @@ bower install
 
 ## 6. هل هناك أدوات تدعم وتتناغم مع Bower؟
 
+هناك عدد من الأدوات التي تدعم Bower منها:
+- [CodeKit](https://incident57.com/codekit/) تطبيق لنظام تشغيل ماك مخصص لإنشاء المواقع.
+- [Sublime bower](https://github.com/benschwarz/sublime-bower) إضافة لمحرر النصوص الشهير Sublime Text تسمح بتنصيب الحزم من خلال البرنامج نفسه.
+- [Atom Bower Install](https://github.com/gdi2290/atom-bower-install) إضافة لمحرر atom مفتوح المصدر تقوم بتنصيب الحزم من خلال البرنامج نفسه.
+- [WebStorm](https://www.jetbrains.com/webstorm) برنامج بيئة متكاملة لتطوير مواقع الويب يتميز بتعامل قوي جداً مع JavaScript، يملك هذا البرنامج دعماً مدمجاً به لأداة Bower.
+- [Visual Studio 2015](https://visualstudio.com/free) النسخة الأخيرة من Visual Studio مدمجة مع دعم لأداة Bower للبحث وتنصيب الحزم.
+- [Package Intellisense for Visual Studio 2013](https://visualstudiogallery.msdn.microsoft.com/65748cdb-4087-497e-a394-2e3449c8e61e)  إضافة مخصصة لـ Visual Studio لإضافة دعم مدير حزم nodejs مع أداة Bower.
+
+هناك أيضاً عدد من الإضافات الخاصة بمشغلات المهام `Grunt` و `Gulp` و `broccoli`.
