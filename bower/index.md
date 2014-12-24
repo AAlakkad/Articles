@@ -212,7 +212,7 @@ bower init
 ```
 ? add commonly ignored files to ignore list?: Yes
 ```
-إضافة الملفات المتعارف على إضافتها إلى لائحة التجاهل في `git` (تحديداً إلى ملف `.gitignore`)، حيث لا يرغب المطورون عادة بوجود هذه الملفات  ضمن مستودع `git`. 
+إضافة الملفات المتعارف على إضافتها إلى لائحة التجاهل في ملف `bower.json`، عادة ما تكون هذه الملفات ملفات غير مفيدة لمستخدم الحزمة، لكن قد يكون مطور الحزمة المُستخدَمة قد أضافها إلى ملفات حزمته، كملفات التجارب، أو مجلد `bower_components` الخاص بالحزمة المطوَّرة.
 ```
 ? would you like to mark this package as private which prevents it from being accidentally published to the registry?: No
 ```
