@@ -386,11 +386,11 @@ the_post();
 </footer>
 ```
 
-سنقوم باستخدام دالّة [`get_tags()`](http://codex.wordpress.org/Function_Reference/get_tags) التي مهمتها إرجاع مصفوفة تحوي جميع الوسوم الخاصّة بالمقال على شكل كائنات (Objects) وليس مجرد نص عادي. بالتالي يمكننا الوصول إلى اسم كل وسم عن طريق: `$tag->name` كما يلي:
+سنقوم باستخدام دالّة [`wp_get_post_tags()`](http://codex.wordpress.org/Function_Reference/wp_get_post_tags) التي مهمتها إرجاع مصفوفة تحوي جميع الوسوم الخاصّة بالمقال على شكل كائنات (Objects) وليس مجرد نص عادي. بالتالي يمكننا الوصول إلى اسم كل وسم عن طريق: `$tag->name` كما يلي:
 ```php
 <footer class="tags">
 <?php
-$tags = get_tags();
+$tags = wp_get_post_tags(get_the_ID());
 foreach($tags as $tag) {
 	echo '<span class="label"> ' . $tag->name . '</span> ';
 }
