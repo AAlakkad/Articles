@@ -69,10 +69,11 @@ get_template_part('sharing');
 ## إضافة أرقام الصفحات **
 يوجد عدة طرق لعرض أرقام الصفحات بطريقة تناسب شكل القالب الذي نقوم باستخدامه (تناسب كيفية عمل أرقام الصفحات في إطاري عمل [Bootstrap](http://getbootstrap.com) و [Foundation](http://foundation.zurb.com/)).
 
-إما نقوم بنسخ دّالّة [`paginate_links()`](http://codex.wordpress.org/Function_Reference/paginate_links) المسؤولة عن عرض أرقام الصفحات ونعدّل عليها حسب المطلوب، وذلك في ملف `functions.php` داخل ملفات قالب ووردبريس.
-أو نقوم باستخدام إضافة [WP-PageNavi](https://wordpress.org/plugins/wp-pagenavi/) التي تعمل بطريقة مشابهة لدالّة `paginate_links()` لكن مع المزيد من الخيارات، منها إمكانية التحكم بالوسوم عن طريق ما يسمّى [Filters](http://codex.wordpress.org/Plugin_API/Filter_Reference).
+- إما نقوم بنسخ دّالّة [`paginate_links()`](http://codex.wordpress.org/Function_Reference/paginate_links) المسؤولة عن عرض أرقام الصفحات ونعدّل عليها حسب المطلوب، وذلك في ملف `functions.php` داخل ملفات قالب ووردبريس.
+- أو نقوم بإنشاء دالّة جديدة تحاكي مبدأ عمل دالّة `paginate_links()` لكن بخيارات أقل حسب ما يتطلبه القالب.
+- أو نقوم باستخدام إضافة [WP-PageNavi](https://wordpress.org/plugins/wp-pagenavi/) التي تعمل بطريقة مشابهة لدالّة `paginate_links()` لكن مع المزيد من الخيارات، منها إمكانية التحكم بالوسوم عن طريق ما يسمّى [Filters](http://codex.wordpress.org/Plugin_API/Filter_Reference).
 
-سنقوم باستخدام الطريقة الأولى، ويمكن استخدام الطريقة الثانية في وقت لاحق عندما نتحدث عن Actions/Filters.
+سنقوم باستخدام الطريقة الأولى، ويمكن استخدام الطريقة الأخيرة في وقت لاحق عندما نتحدث عن Actions/Filters.
 
 
 
