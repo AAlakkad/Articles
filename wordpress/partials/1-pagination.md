@@ -1,6 +1,114 @@
 [TOC]
 # Pagination
 
+تقدّم ووردبريس دالّة مخصّصة لعرض أرقام الصفحات هي [`paginate_links`](http://codex.wordpress.org/Function_Reference/paginate_links).
+سنقوم بالاطلاع على كيفية استخدامها، وننوه بوجود طرق أخرى لعرض أرقام الصفحات، مثل إضافة  [WP-PageNavi](https://wordpress.org/plugins/wp-pagenavi/).
+
+يتم استخدام الدالّة بهذه الطريقة:
+```php
+<?php echo paginate_links($args);?>
+```
+
+حيث متحول `$args` هو مصفوفة تحوي إعدادات مخصصة لهذه الدالّة، الإعدادات الكاملة هي كالتالي بقيمها الافتراضية:
+```php
+<?php
+$args = array(
+'base'               => '%_%',
+	'format'             => '?page=%#%',
+	'total'              => 1,
+	'current'            => 0,
+	'show_all'           => False,
+	'end_size'           => 1,
+	'mid_size'           => 2,
+	'prev_next'          => True,
+	'prev_text'          => __('« Previous'),
+	'next_text'          => __('Next »'),
+	'type'               => 'plain',
+	'add_args'           => False,
+	'add_fragment'       => '',
+	'before_page_number' => '',
+	'after_page_number'  => ''
+);
+?>
+```
+
+يمكننا أن نضع بعض هذه الإعدادات في المتحول، وتقوم ووردبريس بمعالجة الإعدادات التي نقدّمها للدالّة، بحيث تضيف للإعدادات المُدخلة ما يكملها من الإعدادات الافتراضية.
+
+## شرح إعدادات دالّة `paginate_links`
+كما أسلفنا، يمكن أن نمرر جزءاً من الإعدادات ويمكننا ألا نمرر أي شيء على الإطلاق، فتقوم ووردبريس باستخدام الإعدادات الافتراضية التي أوردناها في الأعلى.
+
+- base
+(string) (optional) Used to reference the url, which will be used to create the paginated links. The default value '%_%' in 'http://example.com/all_posts.php%_%' is replaced by 'format' argument (see below).
+Default: '%_%'
+- format
+(string) (optional) Used for Pagination structure. The default value is '?page=%#%', If using pretty permalinks this would be '/page/%#%', where the '%#%' is replaced by the page number.
+Default: '?page=%#%'
+- total
+(integer) (optional) The total amount of pages.
+Default: 1
+- current
+(integer) (optional) The current page number.
+Default: 0
+- show_all
+(boolean) (optional) If set to True, then it will show all of the pages instead of a short list of the pages near the current page. By default, the 'show_all' is set to false and controlled by the 'end_size' and 'mid_size' arguments.
+Default: False
+- end_size
+(integer) (optional) How many numbers on either the start and the end list edges.
+Default: 1
+- mid_size
+(integer) (optional) How many numbers to either side of current page, but not including current page.
+Default: 2
+- prev_next
+(boolean) (optional) Whether to include the previous and next links in the list or not.
+Default: True
+- prev_text
+(string) (optional) The previous page text. Works only if 'prev_next' argument is set to true.
+Default: __('« Previous')
+- next_text
+(string) (optional) The next page text. Works only if 'prev_next' argument is set to true.
+Default: __('Next »')
+- type
+(string) (optional) Controls format of the returned value. Possible values are:
+	- 'plain' - A string with the links separated by a newline character.
+	- 'array' - An array of the paginated link list to offer full control of display.
+	- list' - Unordered HTML list.
+
+Default: 'plain'
+
+- add_args
+(array) (optional) An array of query args to add.
+Default: false
+- add_fragment
+(string) (optional) A string to append to each link.
+Default: None
+- before_page_number
+(string) (optional) A string to appear before the page number.
+Default: None
+- after_page_number
+(string) (optional) A string to append after the page number.
+Default: None
+
+
+*صورة من القالب بعد ظهور أرقام الصفحات*
+
+
+---
+
+# أزرار التالي والسابق
+
+قد يفضّل البعض استخدام أزرار "التالي" و"السابق" بدلاً من أرقام الصفحات، أو ربما يتطلب القالب الذي يعملون عليه هذه الأزرار.
+
+تقدّم ووردبريس دالّة واحدة لعرض الرابطين (التالي - السابق) هي: [`posts_nav_links`](http://codex.wordpress.org/Function_Reference/posts_nav_link).
+
+
+*صورة من القالب بعد ظهور أزرار التالي والسابق*
+
+-------------------------------------------------------------------------------
+
+
+
+
+
 يوجد عدة طرق لعرض أرقام الصفحات بطريقة تناسب شكل القالب الذي نقوم باستخدامه (تناسب كيفية عمل أرقام الصفحات في إطاري عمل [Bootstrap](http://getbootstrap.com) و [Foundation](http://foundation.zurb.com/)).
 
 - إما نقوم بنسخ دالّة [`paginate_links()`](http://codex.wordpress.org/Function_Reference/paginate_links) المسؤولة عن عرض أرقام الصفحات ونعدّل عليها حسب المطلوب، وذلك في ملف `functions.php` داخل ملفات قالب ووردبريس.
