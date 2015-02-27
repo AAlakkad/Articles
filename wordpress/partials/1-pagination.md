@@ -38,36 +38,48 @@ $args = array(
 كما أسلفنا، يمكن أن نمرر جزءاً من الإعدادات ويمكننا ألا نمرر أي شيء على الإطلاق، فتقوم ووردبريس باستخدام الإعدادات الافتراضية التي أوردناها في الأعلى.
 
 - base
-(string) (optional) Used to reference the url, which will be used to create the paginated links. The default value '%_%' in 'http://example.com/all_posts.php%_%' is replaced by 'format' argument (see below).
-Default: '%_%'
+(القيمة اختيارية)، نوعها سلسلة نصيّة.
+تُستخدم للإشارة إلى الرابط، الذي سيتم استخدامه لإنشاء روابط الصفحات.
+في رابط مثل: 'http://example.com/all_posts.php%_%' يتم استبدال القيمة الافتراضية: `%_%` بقيمة format التي سنتحدث عنها في الفقرة التالية.
+القيمة الافتراضية: '%_%'
 - format
-(string) (optional) Used for Pagination structure. The default value is '?page=%#%', If using pretty permalinks this would be '/page/%#%', where the '%#%' is replaced by the page number.
-Default: '?page=%#%'
+(القيمة اختيارية)، نوعها سلسلة نصيّة.
+تُستخدم كهيكل للصفحات. القيمة الافتراضية هي `?page=%#%`، في حال كنا نريد عناوين نظيفة (pretty permalinks) ستكون القيمة هي `/page/%_%`، حيث تعبير `%_%` يتم استبداله برقم الصفحة.
+القيمة الافتراضية: `?page=%#%`
 - total
-(integer) (optional) The total amount of pages.
-Default: 1
+(القيمة اختيارية)، نوعها رقميّ.
+مجموع عدد الصفحات.
+القيمة الافتراضية: 1
 - current
-(integer) (optional) The current page number.
-Default: 0
+(القيمة اختيارية)، نوعها رقميّ.
+رقم الصفحة الحالية.
+القيمة الافتراضية: 0
 - show_all
-(boolean) (optional) If set to True, then it will show all of the pages instead of a short list of the pages near the current page. By default, the 'show_all' is set to false and controlled by the 'end_size' and 'mid_size' arguments.
-Default: False
+(القيمة اختيارية)، نوعها قيمة منطقية (true أو false).
+إذا كانت القيمة `true` عندها سيتم إظهار جميع الصفحات بدلاً من قائمة قصيرة من الأرقام المجاورة لرقم الصفحات الحالية. بشكل افتراضي هذا الخيار تكون قيمته `false` ويتم التحدم به عن طريق خياريّ/ `end_size` و `mid_size`.
+القيمة الافتراضية: false
 - end_size
-(integer) (optional) How many numbers on either the start and the end list edges.
-Default: 1
+(القيمة اختيارية)، نوعها رقميّ.
+عدد الأرقام عند بداية ونهاية أطراف القائمة.
+القيمة الافتراضية: 1
 - mid_size
-(integer) (optional) How many numbers to either side of current page, but not including current page.
-Default: 2
+(القيمة اختيارية)، نوعها رقميّ.
+عدد الأرقام على جانبيّ الصفحة الحالية، (مع ملاحظة أن الرقم لا يشمل الصفحة الحالية).
+القيمة الافتراضية: 2
 - prev_next
-(boolean) (optional) Whether to include the previous and next links in the list or not.
-Default: True
+(القيمة اختيارية)، نوعها قيمة منطقية (true أو false).
+لتحديد إن كنا نريد روابط التالي والسابق أن يتم استخدامها في القائمة أم لا.
+القيمة الافتراضية: true
 - prev_text
-(string) (optional) The previous page text. Works only if 'prev_next' argument is set to true.
-Default: __('« Previous')
+(القيمة اختيارية)، نوعها سلسلة نصّية.
+نص رابط الصفحة السابقة، تعمل فقط إن كان الخيار السابق (prev_next) فعّالاً (قيمته true).
+القيمة الافتراضية: `__('« Previous')` حيث `__()` هي دالّة مسؤولة عن الترجمة.
 - next_text
-(string) (optional) The next page text. Works only if 'prev_next' argument is set to true.
-Default: __('Next »')
+(القيمة اختيارية)، نوعها سلسلة نصّية.
+نص رابط الصفحة التاية، تعمل فقط إن كان خيار (prev_next) فعّالاً (قيمته true).
+القيمة الافتراضية: `__('Next »')` حيث `__()` هي دالّة مسؤولة عن الترجمة.
 - type
+
 (string) (optional) Controls format of the returned value. Possible values are:
 	- 'plain' - A string with the links separated by a newline character.
 	- 'array' - An array of the paginated link list to offer full control of display.
@@ -89,8 +101,9 @@ Default: None
 Default: None
 
 
-*صورة من القالب بعد ظهور أرقام الصفحات*
+*صورة من القالب بعد إظهار أرقام الصفحات دون إعدادات*
 
+*صورة من القالب بعد إظهار أرقام الصفحات مع وجود إعدادات*
 
 ---
 
