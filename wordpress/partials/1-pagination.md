@@ -14,25 +14,29 @@
 <?php
 $args = array(
 'base'               => '%_%',
-	'format'             => '?page=%#%',
-	'total'              => 1,
-	'current'            => 0,
-	'show_all'           => False,
-	'end_size'           => 1,
-	'mid_size'           => 2,
-	'prev_next'          => True,
-	'prev_text'          => __('« Previous'),
-	'next_text'          => __('Next »'),
-	'type'               => 'plain',
-	'add_args'           => False,
-	'add_fragment'       => '',
-	'before_page_number' => '',
-	'after_page_number'  => ''
+    'format'             => '?page=%#%',
+    'total'              => 1,
+    'current'            => 0,
+    'show_all'           => False,
+    'end_size'           => 1,
+    'mid_size'           => 2,
+    'prev_next'          => True,
+    'prev_text'          => __('« Previous'),
+    'next_text'          => __('Next »'),
+    'type'               => 'plain',
+    'add_args'           => False,
+    'add_fragment'       => '',
+    'before_page_number' => '',
+    'after_page_number'  => ''
 );
 ?>
 ```
 
 يمكننا أن نضع بعض هذه الإعدادات في المتحول، وتقوم ووردبريس بمعالجة الإعدادات التي نقدّمها للدالّة، بحيث تضيف للإعدادات المُدخلة ما يكملها من الإعدادات الافتراضية.
+
+*صورة من القالب بعد إظهار أرقام الصفحات دون إعدادات*
+
+سنرى في الفقرة التالية كيف يمكن تخصيص ظهور هذه الروابط.
 
 ## شرح إعدادات دالّة `paginate_links`
 كما أسلفنا، يمكن أن نمرر جزءاً من الإعدادات ويمكننا ألا نمرر أي شيء على الإطلاق، فتقوم ووردبريس باستخدام الإعدادات الافتراضية التي أوردناها في الأعلى.
@@ -56,7 +60,7 @@ $args = array(
 القيمة الافتراضية: 0
 - show_all
 (القيمة اختيارية)، نوعها قيمة منطقية (true أو false).
-إذا كانت القيمة `true` عندها سيتم إظهار جميع الصفحات بدلاً من قائمة قصيرة من الأرقام المجاورة لرقم الصفحات الحالية. بشكل افتراضي هذا الخيار تكون قيمته `false` ويتم التحدم به عن طريق خياريّ/ `end_size` و `mid_size`.
+إذا كانت القيمة `true` عندها سيتم إظهار جميع الصفحات بدلاً من قائمة قصيرة من الأرقام المجاورة لرقم الصفحات الحالية. بشكل افتراضي هذا الخيار تكون قيمته `false` ويتم التحكم به عن طريق الخيارين `end_size` و `mid_size`.
 القيمة الافتراضية: false
 - end_size
 (القيمة اختيارية)، نوعها رقميّ.
@@ -79,29 +83,31 @@ $args = array(
 نص رابط الصفحة التاية، تعمل فقط إن كان خيار (prev_next) فعّالاً (قيمته true).
 القيمة الافتراضية: `__('Next »')` حيث `__()` هي دالّة مسؤولة عن الترجمة.
 - type
+(القيمة اختيارية)، نوعها سلسلة نصّية.
+تتحكم بشكل القيمة التي تقوم الدالّة بإرجاعها. القيمة الممكنة هي:
+    - 'plain' - تكون القيمة التي يتم ارجاعها عبارة عن سلسلة نصّية مؤلفة من روابط مفصول بينها بمحرف السطر الجديد.
+    - 'array' - تكون القيمة التي يتم ارجاعها عبارة عن مصفوفة من روابط الصفحات لتوفّر تحكم كامل بكيفية الظهور.
+    - 'list' - تكون القيمة التي يتم ارجاعها عبارة عن قائمة HTML غير مرتّبة (ul).
 
-(string) (optional) Controls format of the returned value. Possible values are:
-	- 'plain' - A string with the links separated by a newline character.
-	- 'array' - An array of the paginated link list to offer full control of display.
-	- list' - Unordered HTML list.
-
-Default: 'plain'
+القيمة الافتراضية: 'plain'
 
 - add_args
-(array) (optional) An array of query args to add.
-Default: false
+(القيمة اختيارية)، نوعها مصفوفة.
+مصفوفة من المحددات ليتم إضافته إلى الرابط. ##### بحاجة للتأكد تماماً من الصحة #####
+القيمة الافتراضية: false
 - add_fragment
-(string) (optional) A string to append to each link.
-Default: None
+(القيمة اختيارية)، نوعها سلسلة نصيّة.
+نص لتتم إضافته إلى نهاية كل رابط.
+القيمة الافتراضية: لا يوجد قيمة.
 - before_page_number
-(string) (optional) A string to appear before the page number.
-Default: None
+(القيمة اختيارية)، نوعها سلسلة نصيّة.
+نص ليتم إظهاره قبل كل رقم صفحة.
+القيمة الافتراضية: لا يوجد قيمة.
 - after_page_number
-(string) (optional) A string to append after the page number.
-Default: None
+(القيمة اختيارية)، نوعها سلسلة نصيّة.
+نص لتتم إضافته بعد رقم الصفحة.
+القيمة الافتراضية: لا يوجد قيمة.
 
-
-*صورة من القالب بعد إظهار أرقام الصفحات دون إعدادات*
 
 *صورة من القالب بعد إظهار أرقام الصفحات مع وجود إعدادات*
 
