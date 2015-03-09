@@ -1,6 +1,11 @@
 [TOC]
 # القوائم
 
+قوائم التنقّل (Navigation Menu) هي إحدى ميزات القوالب، توفّر ووردبريس طريقة سهلة للتحكم بالقوائم المخصصة للقالب من داخل لوحة تحكم ووردبريس، فتحتاج لإضافة بضعة أسطر برمجية لتضيف دعم القوائم في قالبك.
+
+[`register_nav_menu`](http://codex.wordpress.org/Function_Reference/register_nav_menu)
+[`unregister_nav_menu`](http://codex.wordpress.org/Function_Reference/unregister_nav_menu)
+
 http://codex.wordpress.org/Navigation_Menus
 
 http://codex.wordpress.org/Function_Reference/register_nav_menu
