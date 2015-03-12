@@ -53,8 +53,6 @@ add_action('init', function() {
 
 ```php
 <?php
-<?php
-
 $defaults = array(
 	'theme_location'  => '',
 	'menu'            => '',
