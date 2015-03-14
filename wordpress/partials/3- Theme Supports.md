@@ -1,5 +1,11 @@
 [TOC]
 # Theme Supports
+http://codex.wordpress.org/Theme_Features
+
+http://codex.wordpress.org/Function_Reference/add_theme_support
+http://codex.wordpress.org/Function_Reference/current_theme_supports
+http://codex.wordpress.org/Function_Reference/remove_theme_support
+
 
 ## إمكانية ارفاق صورة لكل مقال **
 ربما لاحظت أثناء إضافة المقالات أنه لا يوجد مكان لإضافة الصورة المميزة (featured image)، وهذا صحيح، فمن أجل إظهار الصورة نستخدم ما يُسمّى **دعم القالب** (Theme Support)، ويعني أن تتعرف ووردبريس عن طريق هذا الاستخدام إلى أن القالب الفعّال يسمح بدعم خصائص معينة ويستطيع معالجتها.
