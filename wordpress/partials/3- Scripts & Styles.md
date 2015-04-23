@@ -15,25 +15,39 @@
 
 ## صفّ ملف CSS
 
-لتسجيل ملفٍّ جديد نقوم باستخدام دالّة [`wp_register_style`](https://codex.wordpress.org/Function_Reference/wp_enqueue_style)، يمكن للدالّة أن تقبل المحدّدات التالية:
+لتسجيل ملفٍّ جديد نقوم باستخدام دالّة [`wp_register_style`](https://codex.wordpress.org/Function_Reference/wp_register_style)، يمكن للدالّة أن تقبل المحدّدات التالية:
 
 - `$handle`: مطلوب، هو المعرّف الخاص بالملف، الذي سيتم استخدامه عند صفّ الملف (enqueue).
-- `$src`: هو رابط (URL) ملف CSS المطلوب تسجيله، مثل: `http://example.com/css/mystyle.css`، لكن يجب ألا يتم استخدام الرابط بهذا الشكل، بل يجب أن يكون أكثر مرونة (التفصيل في الملاحظة بعد نهاية الفقرة).
-- `$deps`:
-- `$ver`: 
-- `$media`:
+- `$src`: مطلوب، هو رابط (URL) ملف CSS المطلوب تسجيله، مثل: `http://example.com/css/mystyle.css`، لكن يجب ألا يتم استخدام الرابط بهذا الشكل، بل يجب أن يكون أكثر مرونة (التفصيل في الملاحظة بعد نهاية الفقرة).
+- `$deps`: مصفوفة من المعرّفات، التي تمثّل متطلبات الملف الذي نقوم بتسجيله، كي يتم صفّها قبل صفّ الملف المُسجَّل. القيمة الافتراضية: مصفوفة فارغة `array()`.
+- `$ver`: إصدار الملف المُسجَّل، تقوم ووردبريس بوضعه كرقم بعد رابط الملف، على الشكل: `custom.css?ver=123`، إن لم يتم وضع قيمة لهذا المحدّد، فسيتم وضع إصدار ووردبريس الحالي بدلاً منه، لعدم وضع أي رقم نضع قيمة المحدّد `null`. القيمة الافتراضية: `false`.
+- `$media`: قيمة حقل `media` الذي سيتم استخدامه مع وسم `<link>` أثناء صفّ الملف، القيمة الممكنة: `all`، `screen`، `handheld`، `print`.  القيمة الافتراضية هي `all`.
+
 
 **ملاحظة هامة:** عند تسجيل أو صفّ الملفات، يجب أن تكون الروابط مرنة، أي أن يتم استبدال اسم الموقع/النطاق عن طريق دوالّ ووردبريس.
 مثال خاطئ:
 ```php
+add_action( 'wp_enqueue_scripts', 'register_invalid_style' );
 
+function register_invalid_style() {
+    wp_register_style( 'my-invalid-style', 'http://localhost/wp-content/themes/my-theme/css/custom.css' );
+}
 ```
+
+هل لاحظتم أنني وضعت المسار كاملاً؟ ترى هل سيعمل الرابط السابق إن قمنا باستخدام القالب على موقع على الإنترنت بدلاً من الموقع المحلّي؟ بالتأكيد لا!
 
 مثال صحيح:
 ```php
+add_action( 'wp_enqueue_scripts', 'register_valid_style' );
 
+function register_valid_style() {
+    wp_register_style( 'my-invalid-style', get_template_directory_uri() . 'my-theme/css/custom.css' );
+}
 ```
-تقوم دالّة `get_template_directory_uri()` بإرجاع رابط القالب الفعّال (active)، مثلاً: `http://example.com/wp-content/themes/my-theme/`، ثم يقوم المطوّر بإضافة مسار الملّف الذي يريده.
+
+تقوم دالّة [`get_template_directory_uri()`](https://codex.wordpress.org/Function_Reference/get_template_directory_uri) بإرجاع رابط القالب الفعّال (active)، مثلاً: `http://example.com/wp-content/themes/my-theme/`، بحيث يكون اسم النطاق حسب الموقع الحالي، ثم يقوم المطوّر بإضافة مسار الملّف الذي يريده إلى رابط القالب الفعّال.
+
+إن أردنا تسجيل وصفّ الملفات ضمن الإضافات بدلاً من القوالب، نقوم باستخدام دالّة [`plugins_url()`](https://codex.wordpress.org/Function_Reference/plugins_url) بدلاً من الدالّة السابقة الخاصة بالقوالب.
 
 
 http://codex.wordpress.org/Function_Reference/wp_register_style
