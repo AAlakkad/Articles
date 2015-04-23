@@ -13,7 +13,9 @@
 3. صفّ الملف (enqueue)؛ باستخدام المعرّف المُستخدم أثناء تسجيل الملف. تخيل أنك تضع الملف في دور/طابور شراء جهاز آي فون جديد مثلاً!
 
 
-## صفّ ملف CSS
+## تسجيل وصفّ ملفات CSS
+
+### تسجيل ملف CSS
 
 لتسجيل ملفٍّ جديد نقوم باستخدام دالّة [`wp_register_style`](https://codex.wordpress.org/Function_Reference/wp_register_style)، يمكن للدالّة أن تقبل المحدّدات التالية:
 
@@ -49,15 +51,82 @@ function register_valid_style() {
 
 إن أردنا تسجيل وصفّ الملفات ضمن الإضافات بدلاً من القوالب، نقوم باستخدام دالّة [`plugins_url()`](https://codex.wordpress.org/Function_Reference/plugins_url) بدلاً من الدالّة السابقة الخاصة بالقوالب.
 
+### صفّ ملف CSS
+لصفّ ملف CSS نستخدم دالّة [`wp_enqueue_style`](https://codex.wordpress.org/Function_Reference/wp_enqueue_style)، محدّدات الدالّة هي نفسها محدّدات دالّة `wp_register_style`، باستثناء:
+- محدّد `$handle` هو المحدد الوحيد المطلوب في حال نقوم باستخدام معرّف لملف مُسجّل مسبقاً.
+- محدد `$src` غير مطلوب  في حال نقوم باستخدام معرّف لملف مُسجّل مسبقاً، ومطلوب إن كنا نريد استخدام الدالّة صفّ ملفّ غير مسجّل. فعوضاً عن تسجيل الملف بدالّة منفصلة ثم صفّه بدالّة أخرى، نقوم بصفّه مباشرة في هذه الدالّة.
 
-http://codex.wordpress.org/Function_Reference/wp_register_style
-http://codex.wordpress.org/Function_Reference/wp_deregister_style
-http://codex.wordpress.org/Function_Reference/wp_enqueue_style
-http://codex.wordpress.org/Function_Reference/wp_dequeue_style
+مثال عن صفّ ملف مسجّل مسبقاً:
+```php
+add_action( 'wp_enqueue_scripts', 'enqueue_style' );
 
-## صفّ ملف جافاسكريبت
+function enqueue_style() {
+    wp_enqueue_style( 'my-invalid-style' );
+}
+```
 
-http://codex.wordpress.org/Function_Reference/wp_register_script
+مثال عنصفّ ملف جديد دون تسجيل:
+```php
+add_action( 'wp_enqueue_scripts', 'register_enqueue_style' );
+
+function register_enqueue_style() {
+    wp_enqueue_style( 'my-invalid-style', get_template_directory_uri() . 'my-theme/css/custom.css' );
+}
+```
+
+نلاحظ أننا في المثال الثاني استخدمنا دالّة `wp_enqueue_style` بشكل مماثل لدالّة `wp_register_style`.
+الفرق الرئيسي بين الطريقتين، أن الأولى تسمح لنا باستخدام الملف المُسجل في عدة أماكن، وتتيح مرونة أكبر بالتعامل مع الملفات.
+
+### إلغاء صفّ أو إلغاء تسجيل ملف
+
+قد نحتاج لإلغاء صفّ ملف، أو إلغاء تسجيله (كما سنرى في نهاية المقال)، تتيح ووردبريس دالّتين لهذين الغرضين هما: [`wp_dequeue_style`](http://codex.wordpress.org/Function_Reference/wp_dequeue_style) لإلغاء صفّ ملف و [`wp_deregister_style`](http://codex.wordpress.org/Function_Reference/wp_deregister_style) لإلغاء تسجيل ملف.
+
+في كلا الدالّتين نقوم بتمرير محدّد واحد هو المعرّف الخاص بالملف الذي نريد إلغاء صفّه أو إلغاء تسجيله، لإلغاء صفّ إطار عمل Bootstrap مثلاً، نضع الأسطر التالية في ملف `functions.php`:
+```php
+add_action( 'wp_enqueue_scripts', 'dequeue_bootstrap' );
+
+function dequeue_bootstrap() {
+    wp_dequeue_style( 'bootstrap' );
+}
+```
+
+---
+
+## تسجيل وصفّ ملفات جافاسكريبت
+
+آلية تسجيل وصفّ ملفات جافاسكريبت هي مماثلة جداً لطريقة التعامل مع ملفات CSS، مع بعض الفروقات البسيطة التي سنستعرضها الآن.
+
+### تسجيل ملف جافاسكريبت
+
+نقوم باستخدام دالّة [`wp_register_script`](http://codex.wordpress.org/Function_Reference/wp_register_script)، التي تقبل المحدّدات التالية:
+
+- `$handle`: مطلوب، هو المعرّف الخاص بالملف، الذي سيتم استخدامه عند صفّ الملف (enqueue).
+- `$src`: مطلوب، هو رابط (URL) ملف جافاسكريبت المطلوب تسجيله، مثل: `http://example.com/js/myscript.js`، لكن يجب ألا يتم استخدام الرابط بهذا الشكل، بل يجب أن يكون مرناً باستخدام `get_template_directory_uri`.
+- `$deps`: مصفوفة من المعرّفات، التي تمثّل متطلبات الملف الذي نقوم بتسجيله، كي يتم صفّها قبل صفّ الملف المُسجَّل. القيمة الافتراضية: مصفوفة فارغة `array()`.
+- `$ver`: إصدار الملف المُسجَّل، تقوم ووردبريس بوضعه كرقم بعد رابط الملف، على الشكل: `custom.js?ver=123`، إن لم يتم وضع قيمة لهذا المحدّد، فسيتم وضع إصدار ووردبريس الحالي بدلاً منه، لعدم وضع أي رقم نضع قيمة المحدّد `null`. القيمة الافتراضية: `false`.
+- `$in_footer`: بشكل افتراضي يتم صفّ ملفات جافاسكريبت وملفات CSS ضمن وسم `<head>`، لكن يمكن بوضع قيمة هذا المحدد `true` أن يتم صفّ ملفات جافاسكريبت في نهاية المستند، قبل إغلاق وسم `</body>`، وهو الأفضل للأداء بالنسبة لزوار الموقع. القيمة الافتراضية: `false`.
+
+**ملاحظة: ** صفّ ملفّات جافاسكريبت و CSS يتطلب وجود خطّاف `wp_head()` ضمن القالب، وصفّ ملفات جافاسكريبت مع محدّد `$in_footer` بقيمة `true` يتطلب وجود خطّاف `wp_footer()` في القالب، قبل إغلاق وسم `</body>`.
+
+
+### صفّ ملف جافاسكريبت
+
+الاستخدام مشابه تماماً لصفّ ملف CSS، لكنه يتم عن طريق دالّة `wp_enqueue_script`، والتي تشابه بمحدداتها دالّة التسجيل `wp_register_script`.
+
+الفرق بين محددات دالة الصفّ ودالّة التسجيل الخاصة بملفات جافاسكريبت هي كالفرق بين محددات دالة الصف والتسجيل الخاصة بملفات CSS.
+
+محدّدات دالّة `wp_enqueue_script` هي نفسها محدّدات دالّة `wp_register_script`، باستثناء:
+- محدّد `$handle` هو المحدد الوحيد المطلوب في حال نقوم باستخدام معرّف لملف مُسجّل مسبقاً.
+- محدد `$src` غير مطلوب  في حال نقوم باستخدام معرّف لملف مُسجّل مسبقاً، ومطلوب إن كنا نريد استخدام الدالّة صفّ ملفّ غير مسجّل. فعوضاً عن تسجيل الملف بدالّة منفصلة ثم صفّه بدالّة أخرى، نقوم بصفّه مباشرة في هذه الدالّة.
+
+
+
+
+
+
+
+
+
 http://codex.wordpress.org/Function_Reference/wp_deregister_script
 http://codex.wordpress.org/Function_Reference/wp_enqueue_script
 http://codex.wordpress.org/Function_Reference/wp_dequeue_script
