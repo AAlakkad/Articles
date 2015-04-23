@@ -1,22 +1,47 @@
 [TOC]
 # Scripts & Styles
 
-مرّ معنا أثناء إضافة أرقام الصفحات كيف أضفنا ملف CSS جديد عن طريق وضع بضعة أسطر في ملف `functions.php` في ملفات القالب. سنتناول في هذا الدرس الشرح التفصيلي والفائدة من تلك الطريقة، وكيف أن جميع ملفات JavaScript و CSS يجب أن يتم استخدامها بتلك الطريقة.
+مرّ معنا أثناء إضافة أرقام الصفحات كيف أضفنا ملف CSS جديد عن طريق وضع بضعة أسطر في ملف `functions.php` في ملفات القالب. سنتناول في هذا الدرس الشرح التفصيلي لهذه الآلية، وهي الطريقة الآمنة لإضافة ملفات JavaScript و CSS.
 
 ## الخطوات العامة
-تسجيل الملف المراد استخدامه وتحديد متطلباته (dependencies)
-وضع الملف في الصفّ (enqueue)
+سنعرض الآن الخطوات بشكل عام، ثم تفصيلها وطريقة استخدامها في الفقرة اللاحقة.
+
+لصفّ ملفٍّ ما، سواء كان ملف JavaScript أو CSS نحتاج إلى:
+
+1. استخدام الحدث (action) المناسب.
+2. تسجيل الملف المراد استخدامه؛ حيث يجب استخدام معرّف (handler) للملف، مسار الملف، ويمكن تحديد متطلباته (dependencies) إن وُجدت.
+3. صفّ الملف (enqueue)؛ باستخدام المعرّف المُستخدم أثناء تسجيل الملف. تخيل أنك تضع الملف في دور/طابور شراء جهاز آي فون جديد مثلاً!
 
 
+## صفّ ملف CSS
 
-## Style
+لتسجيل ملفٍّ جديد نقوم باستخدام دالّة [`wp_register_style`](https://codex.wordpress.org/Function_Reference/wp_enqueue_style)، يمكن للدالّة أن تقبل المحدّدات التالية:
+
+- `$handle`: مطلوب، هو المعرّف الخاص بالملف، الذي سيتم استخدامه عند صفّ الملف (enqueue).
+- `$src`: هو رابط (URL) ملف CSS المطلوب تسجيله، مثل: `http://example.com/css/mystyle.css`، لكن يجب ألا يتم استخدام الرابط بهذا الشكل، بل يجب أن يكون أكثر مرونة (التفصيل في الملاحظة بعد نهاية الفقرة).
+- `$deps`:
+- `$ver`: 
+- `$media`:
+
+**ملاحظة هامة:** عند تسجيل أو صفّ الملفات، يجب أن تكون الروابط مرنة، أي أن يتم استبدال اسم الموقع/النطاق عن طريق دوالّ ووردبريس.
+مثال خاطئ:
+```php
+
+```
+
+مثال صحيح:
+```php
+
+```
+تقوم دالّة `get_template_directory_uri()` بإرجاع رابط القالب الفعّال (active)، مثلاً: `http://example.com/wp-content/themes/my-theme/`، ثم يقوم المطوّر بإضافة مسار الملّف الذي يريده.
+
 
 http://codex.wordpress.org/Function_Reference/wp_register_style
 http://codex.wordpress.org/Function_Reference/wp_deregister_style
 http://codex.wordpress.org/Function_Reference/wp_enqueue_style
 http://codex.wordpress.org/Function_Reference/wp_dequeue_style
 
-## Script
+## صفّ ملف جافاسكريبت
 
 http://codex.wordpress.org/Function_Reference/wp_register_script
 http://codex.wordpress.org/Function_Reference/wp_deregister_script
@@ -77,6 +102,8 @@ function register_jquery() {
 ```
 
 قمنا بإلغاء تسجيل jQuery (كانت مسجلة مع الملف المتضمَّن في ووردبريس)، ثم قمنا بتسجيلها مع رابط الملف من شبكة توصيل المحتوى (CDN)، وأخيراً قمنا بصفّها (enqueue) ليتم إدراجها في القالب.
+
+### 4. 
 
 
 ## الخاتمة:
