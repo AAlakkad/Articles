@@ -43,8 +43,13 @@ function register_invalid_style() {
 add_action( 'wp_enqueue_scripts', 'register_valid_style' );
 
 function register_valid_style() {
-    wp_register_style( 'my-invalid-style', get_template_directory_uri() . 'my-theme/css/custom.css' );
+    wp_register_style( 'my-valid-style', get_template_directory_uri() . '/css/custom.css' );
 }
+```
+
+تكون النتيجة في المتصفح مشابهة للتالي:
+```html
+<link rel='stylesheet' id='my-valid-style-css'  href='http://localhost:8000/wp-content/themes/my-theme/css/custom.css?ver=4.2' type='text/css' media='all' />
 ```
 
 تقوم دالّة [`get_template_directory_uri()`](https://codex.wordpress.org/Function_Reference/get_template_directory_uri) بإرجاع رابط القالب الفعّال (active)، مثلاً: `http://example.com/wp-content/themes/my-theme/`، بحيث يكون اسم النطاق حسب الموقع الحالي، ثم يقوم المطوّر بإضافة مسار الملّف الذي يريده إلى رابط القالب الفعّال.
@@ -61,16 +66,16 @@ function register_valid_style() {
 add_action( 'wp_enqueue_scripts', 'enqueue_style' );
 
 function enqueue_style() {
-    wp_enqueue_style( 'my-invalid-style' );
+    wp_enqueue_style( 'my-valid-style' );
 }
 ```
 
-مثال عنصفّ ملف جديد دون تسجيل:
+مثال عن صفّ ملف جديد دون تسجيل:
 ```php
 add_action( 'wp_enqueue_scripts', 'register_enqueue_style' );
 
 function register_enqueue_style() {
-    wp_enqueue_style( 'my-invalid-style', get_template_directory_uri() . 'my-theme/css/custom.css' );
+    wp_enqueue_style( 'my-valid-style', get_template_directory_uri() . 'my-theme/css/custom.css' );
 }
 ```
 
@@ -188,6 +193,13 @@ function enqueue_custom_js() {
 ```
 قمنا بتسجيل الملف الذي نريد صفّه، ولنلاحظ كيف حدّدنا متطلبات الملف ضمن مصفوفة، يعتمد الملف على مكتبة jQuery فقط.
 ثم قمنا بصفّه باستخدام المعرّف الذي استخدمناه أثناء تسجيل الملف.
+
+تكون النتيجة في المتصفح مشابهة للتالي:
+```html
+<script type="text/javascript" src="//cdn.jsdelivr.net/jquery/2.1.3/jquery.min.js?ver=4.2"></script>
+<script type="text/javascript" src="http://localhost:8000/wp-content/themes/my-theme/js/custom.js?ver=4.2"></script>
+```
+ونلاحظ أن ووردبريس قامت بصفّ مكتبة jQuery قبل الملف الذي قمنا بتسجيله، وذلك كي يقوم المتصفح بقراءة ملف المكتبة في البداية وتكون متوفرة للاستخدام، وعند قراءة المتصفح للملف الخاص يمكن للملف استخدام مكتبة jQuery بعد أن أصبحت متوفرة.
 
 
 ## الخاتمة
